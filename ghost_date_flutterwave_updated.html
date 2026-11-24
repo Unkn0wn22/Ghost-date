@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#05060f">
+<title>Ghost Date – Find love. Your way.</title>
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05060f;--ink:#e8eaf6;--mut:#8f94b0;--line:rgba(255,255,255,.1);--glass:rgba(13,15,32,.64);--vio:#7c5cff;--acc:#f5c542;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 75% 0,#161236,var(--bg) 62%) fixed;color:var(--ink);font:400 16px/1.6 Manrope,system-ui,sans-serif;overflow-x:hidden;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+h1,h2,h3,.logo,.btn,.big{font-family:"Chakra Petch",system-ui,sans-serif}
+#bg{position:fixed;inset:0;z-index:-1;width:100%;height:100%}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+nav{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:12px 20px;backdrop-filter:blur(14px);background:rgba(5,6,15,.6);border-bottom:1px solid var(--line)}
+.logo{display:flex;gap:10px;align-items:center;font-weight:700;font-size:1.1rem;letter-spacing:.04em}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:10px;padding:13px 22px;font-weight:700;font-size:.98rem;color:#fff;background:linear-gradient(135deg,var(--vio),#5b3df5);cursor:pointer;box-shadow:0 0 26px rgba(124,92,255,.35);text-decoration:none}
+.btn:hover{box-shadow:0 0 38px rgba(124,92,255,.65)}
+.btn.ghost{background:transparent;border:1px solid var(--line);box-shadow:none;color:var(--ink)}
+.btn.sm{padding:9px 15px;font-size:.88rem}
+.btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
+section{max-width:1000px;margin:0 auto;padding:68px 20px}
+.hero{min-height:86vh;display:flex;flex-direction:column;justify-content:center;gap:22px}
+h1{font-size:clamp(2.8rem,10vw,5.6rem);line-height:.98;letter-spacing:-.03em;max-width:9em}
+h2{font-size:clamp(1.6rem,5vw,2.3rem);letter-spacing:-.02em;margin-bottom:26px}
+.sub{color:var(--mut);max-width:34em;font-size:1.08rem}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.big{font-size:2.4rem;font-weight:700;color:var(--acc);line-height:1}
+.st{border-top:1px solid var(--line);padding-top:16px}
+.st h3{margin:10px 0 6px}.st p,.tl p,.path p{color:var(--mut);font-size:.93rem}
+.path{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:24px;text-align:left;color:inherit;font:inherit;cursor:pointer;backdrop-filter:blur(12px);transition:border-color .25s,box-shadow .25s}
+.path h3{margin:12px 0 4px;font-size:1.25rem}
+.path.on{border-color:var(--acc);box-shadow:0 0 34px -8px var(--acc)}
+svg.i{width:26px;height:26px;flex:none;stroke:var(--acc);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));column-gap:36px;list-style:none}
+.tl li{display:flex;gap:16px;padding:20px 0;border-top:1px solid var(--line)}
+.tl h3{font-size:1.05rem;margin-bottom:2px}
+.panel{background:var(--glass);border:1px solid var(--line);border-radius:22px;padding:24px;backdrop-filter:blur(16px);scroll-margin-top:76px}
+.f{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+label{display:grid;gap:6px;font-size:.88rem;color:var(--mut)}
+input,select{width:100%;background:rgba(0,0,0,.45);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:12px 14px;font:inherit;font-size:1rem}
+.step{display:none}.step.on{display:block;animation:in .45s}
+@keyframes in{from{opacity:0;transform:translateY(10px)}}
+.m{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.m>div:nth-child(2){flex:1}
+.chip{font-size:.75rem;border:1px solid var(--line);border-radius:99px;padding:1px 10px;color:var(--mut);text-transform:capitalize}
+.ring{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--acc) calc(var(--p)*1%),rgba(255,255,255,.1) 0)}
+.ring b{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#0b0d1c;font-size:.78rem}
+.chat{height:170px;overflow:auto;display:flex;flex-direction:column;gap:8px;padding:12px;background:rgba(0,0,0,.4);border-radius:14px;margin:14px 0}
+.b{max-width:80%;padding:9px 13px;border-radius:14px;background:#1a1d33;font-size:.92rem}
+.b.me{align-self:flex-end;background:rgba(124,92,255,.38)}
+.warn{display:none;gap:10px;margin-bottom:10px;padding:10px 14px;border-radius:12px;border:1px solid #ff6b6b;background:rgba(255,107,107,.1);font-size:.88rem}
+.warn.on{display:flex}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center;margin:12px 0 16px}
+.stats b{display:block;font:700 1.25rem "Chakra Petch",sans-serif;color:var(--acc)}
+.plan{list-style:none}.plan li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+h4{font:700 1.05rem "Chakra Petch",sans-serif;margin:26px 0 10px}
+footer{text-align:center;color:var(--mut);font-size:.82rem;padding:36px 20px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+<symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></symbol>
+<symbol id="ring" viewBox="0 0 24 24"><circle cx="12" cy="15" r="6"/><path d="M8 4l2-2h4l2 2-4 4z"/></symbol>
+<symbol id="heart" viewBox="0 0 24 24"><path d="M12 20s-8-5-8-11a4.5 4.5 0 018-2.5A4.5 4.5 0 0120 9c0 6-8 11-8 11z"/></symbol>
+<symbol id="users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-4 3-6 6-6s6 2 6 6M15 14c3 0 6 1.5 6 5"/></symbol>
+</svg>
+
+<nav><div class="logo"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#7c5cff" stroke-width="1.6"><path d="M13 2l10 6v10l-10 6L3 18V8z"/><path d="M13 2v22M3 8l20 10M23 8L3 18" stroke="#22d3ee" stroke-opacity=".6"/></svg>Ghost Date</div><a class="btn sm" href="#app">Get started</a></nav>
+
+<section class="hero">
+<h1>Find love. Your way.</h1>
+<p class="sub">Meet people who want the same thing you do: marriage, a partner, or a real friendship. Stay anonymous until you both choose to be seen.</p>
+<div class="row"><a class="btn" href="#app">Start private discovery</a><a class="btn ghost" href="#how">See how it works</a></div>
+</section>
+
+<section id="how"><h2>How it works</h2>
+<div class="grid">
+<div class="st"><span class="big">1</span><h3>Choose your path</h3><p>Marriage, couple or friendship. You only see people who chose the same.</p></div>
+<div class="st"><span class="big">2</span><h3>Match privately</h3><p>No photo and no number. Your interest stays hidden until it is mutual.</p></div>
+<div class="st"><span class="big">3</span><h3>Meet safely</h3><p>You get 72 hours, a shared budget and a date plan you both agree on.</p></div>
+</div></section>
+
+<section><h2>What are you looking for?</h2>
+<div class="grid">
+<button class="path on" data-p="marriage"><svg class="i"><use href="#ring"/></svg><h3>Marriage</h3><p>Serious, long-term and family-minded.</p></button>
+<button class="path" data-p="couple"><svg class="i"><use href="#heart"/></svg><h3>Couple</h3><p>Dating with a clear heart and honest pace.</p></button>
+<button class="path" data-p="friendship"><svg class="i"><use href="#users"/></svg><h3>Friendship</h3><p>Real people, no pressure to be more.</p></button>
+</div></section>
+
+<section><h2>Safety built in</h2>
+<ul class="tl">
+<li><svg class="i"><use href="#shield"/></svg><div><h3>18+ and verified</h3><p>An age check at the door and verified badges on profiles.</p></div></li>
+<li><svg class="i"><use href="#shield"/></svg><div><h3>Scam Shield</h3><p>Money requests such as M-Pesa are flagged in chat before they cost you.</p></div></li>
+<li><svg class="i"><use href="#eye"/></svg><div><h3>Mutual reveal</h3><p>Name, photo and WhatsApp unlock one at a time, only if both agree.</p></div></li>
+<li><svg class="i"><use href="#lock"/></svg><div><h3>Safety check-in</h3><p>Share where you are going with someone you trust in one tap.</p></div></li>
+</ul></section>
+
+<section id="app"><h2>Try it now</h2>
+<div class="panel">
+
+<div class="step on" id="s1"><div class="f">
+<label>Your name<input id="nm" placeholder="First name" autocomplete="off"></label>
+<label>Invite code (optional)<input placeholder="e.g. LADIES2026"></label>
+<label>I am looking for<select id="lf"><option value="w">A woman</option><option value="m">A man</option><option value="a">Anyone</option></select></label>
+<label>Intention<select id="it"><option value="marriage">Marriage</option><option value="couple">Couple</option><option value="friendship">Friendship</option></select></label>
+<label>Privacy mode<select><option>Ghost (invisible)</option><option>Masked (partial)</option><option>Open</option></select></label>
+<label>Max date budget (TSh)<input id="bd" type="number" value="50000" min="0" step="5000"></label></div>
+<label style="display:flex;gap:10px;align-items:center;margin:16px 0"><input id="ag" type="checkbox" style="width:auto"> I confirm I am 18 or older</label>
+<button class="btn" style="width:100%" onclick="go()">Start private discovery</button></div>
+
+<div class="step" id="s2"><h3 style="margin-bottom:4px">Matches who want the same as you</h3><div id="ml"></div>
+<button class="btn ghost" style="width:100%;margin-top:14px" onclick="show(1)">Adjust preferences</button></div>
+
+<div class="step" id="s3">
+<div style="display:flex;gap:16px;align-items:center"><svg width="90" height="90" viewBox="0 0 86 86" style="flex:none"><circle cx="43" cy="43" r="38" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="5"/><circle id="arc" cx="43" cy="43" r="38" fill="none" stroke="var(--acc)" stroke-width="5" stroke-linecap="round" stroke-dasharray="238.76" stroke-dashoffset="0" transform="rotate(-90 43 43)"/><text id="tt" x="43" y="48" text-anchor="middle" fill="#e8eaf6" font-size="14" font-weight="700" font-family="Chakra Petch,sans-serif">72:00:00</text></svg>
+<div><h3 id="mn" style="font-size:1.4rem">Amina</h3><p class="sub" style="font-size:.92rem">It is mutual. Your 72-hour window has started.</p></div></div>
+<div class="chat" id="ch"><div class="b">Hi! Nice to match with you. How is your day going?</div></div>
+<div class="warn" id="wr"><svg class="i" style="stroke:#ff6b6b"><use href="#shield"/></svg><span><b>Scam Shield:</b> money requests are a common scam. Never send money to someone you have not met.</span></div>
+<div class="row" style="flex-wrap:nowrap"><input id="mi" placeholder="Type a message (try “M-Pesa”)" style="min-width:0"><button class="btn sm" onclick="say()">Send</button></div>
+
+<h4>Mutual reveal</h4>
+<div class="row" id="rv"><button class="btn ghost sm" data-s="Name">Name</button><button class="btn ghost sm" data-s="Photo">Photo</button><button class="btn ghost sm" data-s="WhatsApp">WhatsApp (2,000 TSh)</button></div>
+
+<h4>Two-person budget</h4>
+<div class="stats"><div><small>You</small><b id="b1"></b></div><div><small>Them</small><b id="b2"></b></div><div><small>Agreed plan</small><b id="b3"></b></div></div>
+<button class="btn" style="width:100%" onclick="plan()">Generate date plan</button>
+<ul class="plan" id="pl"></ul>
+<div id="sf" style="display:none;margin-top:18px;padding:16px;border:1px solid var(--acc);border-radius:14px"><b>Safety check-in</b><p class="sub" style="font-size:.9rem;margin:2px 0 10px">Let a trusted contact know where you are going.</p><button class="btn ghost sm" onclick="link()">Generate safety link</button><p id="lk" style="margin-top:10px;word-break:break-all;font-size:.85rem"></p></div>
+</div>
+
+</div></section>
+<footer>Ghost Date is for adults only. Meet in public places and tell someone you trust.</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),all=s=>document.querySelectorAll(s),F=n=>Number(n).toLocaleString("en-US"),
+C={marriage:"#f5c542",couple:"#ff5c8a",friendship:"#22d3ee"},
+P=[["Amina","w","marriage",165,30000],["Neema","w","marriage",172,40000],["Zawadi","w","couple",168,25000],["Rehema","w","friendship",160,20000],["Juma","m","marriage",180,35000],["Baraka","m","couple",178,30000],["Idrisa","m","friendship",175,20000]];
+let me={},cur,tk;
+function pick(p){all(".path").forEach(x=>x.classList.toggle("on",x.dataset.p==p));document.documentElement.style.setProperty("--acc",C[p]);$("#it").value=p;window.setPath&&setPath(C[p])}
+all(".path").forEach(b=>b.onclick=()=>pick(b.dataset.p));$("#it").onchange=e=>pick(e.target.value);
+function show(n){all(".step").forEach((s,i)=>s.classList.toggle("on",i==n-1));$(".panel").scrollIntoView({behavior:"smooth"})}
+function av(n){let h=0;for(const c of n)h=(h*31+c.charCodeAt(0))>>>0;const k=h%360,r=()=>(h=(h*1103515245+12345)>>>0)%100/100,q=[];
+for(let i=0;i<6;i++){const a=i*1.047,d=9+r()*11;q.push([24+Math.cos(a)*d|0,24+Math.sin(a)*d|0])}
+return `<svg width="52" height="52" viewBox="0 0 48 48" style="flex:none"><polygon points="${q.join(" ")}" fill="hsl(${k} 80% 60%/.25)" stroke="hsl(${k} 80% 65%)" stroke-width="1.4"/>${q.map(p=>`<line x1="24" y1="24" x2="${p[0]}" y2="${p[1]}" stroke="hsl(${k} 80% 65%/.5)"/>`).join("")}</svg>`}
+function go(){if(!$("#ag").checked)return alert("Please confirm you are 18 or older.");
+me={lf:$("#lf").value,it:$("#it").value,bd:+$("#bd").value||0};
+$("#ml").innerHTML=P.filter(p=>p[2]==me.it&&(me.lf=="a"||p[1]==me.lf)).map(p=>{const s=88+(p[0].length*7+p[3])%10;
+return `<div class="m">${av(p[0])}<div><b>${p[0]}</b> <svg class="i" style="width:15px;height:15px;vertical-align:-2px"><use href="#shield"/></svg><br><span class="chip">${me.it}</span> <span class="chip">${p[3]} cm</span></div><div class="ring" style="--p:${s}"><b>${s}%</b></div><button class="btn sm" onclick="mutual(${P.indexOf(p)},this)">Send interest</button></div>`}).join("");show(2)}
+function mutual(i,b){b.textContent="Sending…";b.disabled=true;setTimeout(()=>{cur=P[i];$("#mn").textContent=cur[0];$("#b1").textContent=F(me.bd);$("#b2").textContent=F(cur[4]);$("#b3").textContent=F(Math.min(me.bd,cur[4]));$("#pl").innerHTML="";$("#sf").style.display="none";show(3);tick()},1100)}
+function tick(){const t0=Date.now();clearInterval(tk);tk=setInterval(()=>{const r=Math.max(0,259200-(Date.now()-t0)/1000|0);$("#arc").style.strokeDashoffset=238.76*(1-r/259200);$("#tt").textContent=[r/3600|0,r/60%60|0,r%60].map(x=>String(x).padStart(2,"0")).join(":")},1000)}
+function add(t,m){const d=document.createElement("div");d.className="b"+(m?" me":"");d.textContent=t;$("#ch").append(d);$("#ch").scrollTop=1e5}
+function say(){const i=$("#mi"),v=i.value.trim();if(!v)return;add(v,1);i.value="";
+if(/m-?pesa|tigo ?pesa|airtel ?money|send money|tuma pesa|western union|bitcoin/i.test(v))$("#wr").classList.add("on");
+else setTimeout(()=>add(["Haha, nice! Tell me more.","That sounds lovely.","I like that. What do you do for fun?"][Math.random()*3|0]),900)}
+$("#mi").onkeydown=e=>e.key=="Enter"&&say();
+const revealButtons=all("#rv button");
+let whatsappPaid=false;
+let paymentModal=null;
+
+revealButtons.forEach((b,i)=>{
+  if(i>0)b.disabled=true;
+
+  b.addEventListener("click",()=>{
+    // Name and Photo remain free and unlock in sequence.
+    if(b.dataset.s!=="WhatsApp"){
+      b.textContent=b.dataset.s+": waiting…";
+      b.disabled=true;
+
+      setTimeout(()=>{
+        b.textContent=b.dataset.s+" unlocked";
+        b.style.borderColor="var(--acc)";
+        if(revealButtons[i+1])revealButtons[i+1].disabled=false;
+      },1300);
+      return;
+    }
+
+    // WhatsApp can only be purchased after Photo has been unlocked.
+    if(whatsappPaid || b.disabled)return;
+
+    if(typeof window.FlutterwaveCheckout!=="function"){
+      alert("The payment service could not load. Please check your connection and try again.");
+      return;
+    }
+
+    b.disabled=true;
+    b.textContent="Opening checkout…";
+
+    try{
+      paymentModal=FlutterwaveCheckout({
+        public_key:"FLWPUBK_TEST-c0389e4d72c059d6df61693bd611206e-X",
+        tx_ref:"gd-"+Date.now(),
+        amount:2000,
+        currency:"TZS",
+        payment_options:"mobilemoneytanzania, card",
+        customer:{
+          email:"user@ghostdate.co.tz",
+          name:$("#nm").value || "Ghost User"
+        },
+        customizations:{
+          title:"Ghost Date",
+          description:"Unlock "+(cur?.[0] || "your match")+"'s WhatsApp"
+        },
+        callback:function(data){
+          const status=String(data?.status || "").toLowerCase();
+
+          if(status==="successful" || status==="completed"){
+            whatsappPaid=true;
+            b.textContent="WhatsApp unlocked ✓";
+            b.style.borderColor="var(--acc)";
+            b.disabled=true;
+
+            // Flutterwave documents close() on the object returned by Inline.
+            if(paymentModal && typeof paymentModal.close==="function"){
+              paymentModal.close();
+            }
+          }else{
+            b.textContent="WhatsApp (2,000 TSh)";
+            b.disabled=false;
+          }
+        },
+        onclose:function(){
+          if(!whatsappPaid){
+            b.textContent="WhatsApp (2,000 TSh)";
+            b.disabled=false;
+          }
+          paymentModal=null;
+        }
+      });
+    }catch(error){
+      console.error("Flutterwave checkout error:",error);
+      b.textContent="WhatsApp (2,000 TSh)";
+      b.disabled=false;
+      alert("Checkout could not be opened. Please try again.");
+    }
+  });
+});
+function plan(){const a=Math.min(me.bd,cur[4]),O=[["Waterfront walk",0],["Coffee & pastries",15000],["Sunset ice cream",8000],["Lunch for two",25000],["Evening show",30000]];let s=0;
+$("#pl").innerHTML=O.filter(o=>s+o[1]<=a?(s+=o[1],1):0).map(o=>`<li><span>${o[0]}</span><span>${o[1]?F(o[1])+" TSh":"Free"}</span></li>`).join("")+`<li><b>Total</b><b>${F(s)} TSh</b></li><li style="display:block;color:var(--mut)">Date companion: “What is one thing you want to achieve in the next five years?”</li>`;$("#sf").style.display="block"}
+function link(){$("#lk").textContent="Demo link: "+(location.host||"ghost-date")+"/safe/"+Math.random().toString(36).slice(2,10)}
+
+(()=>{if(!window.THREE)return;
+const W=()=>innerWidth,H=()=>innerHeight,low=(navigator.hardwareConcurrency||4)<=4,rm=matchMedia("(prefers-reduced-motion:reduce)").matches,
+r=new THREE.WebGLRenderer({canvas:$("#bg"),antialias:!low,alpha:true}),sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(55,1,.1,100),
+col=new THREE.Color("#f5c542"),tg=new THREE.Color("#f5c542"),g=new THREE.IcosahedronGeometry(4.2,low?1:2),
+solid=new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:0x2a2060,flatShading:true,transparent:true,opacity:.6,roughness:.4,metalness:.3})),
+wire=new THREE.Mesh(g,new THREE.MeshBasicMaterial({color:col,wireframe:true,transparent:true,opacity:.4})),
+grp=new THREE.Group(),sh=[],pl=new THREE.PointLight(0xf5c542,1.5,40);
+r.setPixelRatio(Math.min(devicePixelRatio,low?1:1.5));cam.position.z=9;grp.add(solid,wire);sc.add(grp);
+for(let i=0;i<(low?10:22);i++){const m=new THREE.Mesh(new THREE.TetrahedronGeometry(.25+Math.random()*.5),new THREE.MeshBasicMaterial({color:0x7c5cff,wireframe:true,transparent:true,opacity:.5}));
+m.position.set((Math.random()-.5)*20,(Math.random()-.5)*12,(Math.random()-.5)*8-2);m.userData.v=[Math.random()*.01,Math.random()*.01];sc.add(m);sh.push(m)}
+sc.add(new THREE.AmbientLight(0x6655ff,.6));pl.position.set(-6,4,6);sc.add(pl);
+let mx=0,my=0,run=true;
+addEventListener("pointermove",e=>{mx=e.clientX/W()-.5;my=e.clientY/H()-.5});
+addEventListener("deviceorientation",e=>{if(e.gamma!=null){mx=e.gamma/60;my=(e.beta-45)/90}});
+function rs(){r.setSize(W(),H(),false);cam.aspect=W()/H();cam.updateProjectionMatrix();grp.position.x=W()>800?2.8:0;if(rm)loop()}
+addEventListener("resize",rs);
+document.addEventListener("visibilitychange",()=>{run=!document.hidden;if(run)loop()});
+window.setPath=c=>tg.set(c);
+function loop(t=0){if(!run)return;t*=.001;col.lerp(tg,.04);wire.material.color.copy(col);pl.color.copy(col);
+grp.rotation.y=t*.12;grp.rotation.x=t*.06;grp.scale.setScalar(1+Math.sin(t)*.025);
+sh.forEach(m=>{m.rotation.x+=m.userData.v[0];m.rotation.y+=m.userData.v[1]});
+cam.position.x+=(mx*2-cam.position.x)*.04;cam.position.y+=(-my*1.5-cam.position.y)*.04;cam.lookAt(0,0,0);r.render(sc,cam);if(!rm)requestAnimationFrame(loop)}
+rs();loop()})();
+</script>
+</body></html>
