@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#05060f"><title>Your match – Ghost Date</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
+<script src="https://checkout.flutterwave.com/v3.js"></script></head><body data-step="4">
+<section><div style="display:flex;gap:16px;align-items:center"><svg width="90" height="90" viewBox="0 0 86 86" style="flex:none"><circle cx="43" cy="43" r="38" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="5"/><circle id="arc" cx="43" cy="43" r="38" fill="none" stroke="var(--acc)" stroke-width="5" stroke-linecap="round" stroke-dasharray="238.76" stroke-dashoffset="0" transform="rotate(-90 43 43)"/><text id="tt" x="43" y="48" text-anchor="middle" fill="#e8eaf6" font-size="14" font-weight="700" font-family="Chakra Petch,sans-serif">72:00:00</text></svg><div><h3 id="mn" style="font-size:1.4rem"></h3><p class="sub" style="font-size:.92rem">It is mutual. Your 72-hour window has started.</p></div></div>
+<div class="chat" id="ch"><div class="b">Hi! Nice to match with you. How is your day going?</div></div>
+<div class="warn" id="wr"><svg class="i" style="stroke:#ff6b6b"><use href="#shield"/></svg><span><b>Scam Shield:</b> money requests are a common scam. Never send money to someone you have not met.</span></div>
+<div class="row" style="flex-wrap:nowrap"><input id="mi" placeholder="Type a message (try “M-Pesa”)" style="min-width:0"><button class="btn sm" onclick="say()">Send</button></div>
+<h4>Mutual reveal</h4><div class="row"><button class="btn ghost sm" id="r1"></button><button class="btn ghost sm" id="r2"></button></div>
+<h4>Two-person budget</h4><div class="stats"><div><small>You</small><b id="b1"></b></div><div><small>Them</small><b id="b2"></b></div><div><small>Agreed plan</small><b id="b3"></b></div></div>
+<button class="btn" style="width:100%" onclick="plan()">Generate date plan</button><ul class="plan" id="pl"></ul><div id="sf" style="display:none;margin-top:18px;padding:16px;border:1px solid var(--acc);border-radius:14px"><b>Safety check-in</b><p class="sub" style="font-size:.9rem;margin:2px 0 10px">Let a trusted contact know where you are going.</p><button class="btn ghost sm" onclick="link()">Generate safety link</button><p id="lk" style="margin-top:10px;word-break:break-all;font-size:.85rem"></p></div></section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script><script src="common.js"></script><script src="pay.js"></script><script src="bg.js"></script>
+<script>if(S.cur==null)location.replace("matches.html");
+const cur=P[S.cur]||P[0],t0=S.t0||Date.now(),a=Math.min(S.bd,cur[4]);
+$("#b1").textContent=F(S.bd);$("#b2").textContent=F(cur[4]);$("#b3").textContent=F(a);
+function rv(){const u=S.un.includes(S.cur),w=S.wa.includes(S.cur);
+$("#r1").textContent=u?"Name & photo unlocked":"Unlock name & photo · "+F(PR.unlock)+" TSh";$("#r1").disabled=u;
+$("#r2").textContent=w?"WhatsApp unlocked":"Unlock WhatsApp · "+F(PR.whatsapp)+" TSh";$("#r2").disabled=w||!u;
+$("#mn").textContent=u?cur[0]:gid(cur)}
+$("#r1").onclick=()=>pay({amount:PR.unlock,what:"unlock",title:"Unlock name and photo",ok:()=>{S.un.push(S.cur);save();rv()}});
+$("#r2").onclick=()=>pay({amount:PR.whatsapp,what:"whatsapp",title:"Unlock WhatsApp",ok:()=>{S.wa.push(S.cur);save();rv()}});
+rv();
+function tk(){const r=Math.max(0,259200-(Date.now()-t0)/1000|0);$("#arc").style.strokeDashoffset=238.76*(1-r/259200);$("#tt").textContent=[r/3600|0,r/60%60|0,r%60].map(x=>String(x).padStart(2,"0")).join(":")}tk();setInterval(tk,1000);
+function add(t,m){const d=document.createElement("div");d.className="b"+(m?" me":"");d.textContent=t;$("#ch").append(d);$("#ch").scrollTop=1e5}
+function say(){const i=$("#mi"),v=i.value.trim();if(!v)return;add(v,1);i.value="";
+if(/m-?pesa|tigo ?pesa|mixx|halo ?pesa|airtel ?money|send money|tuma pesa|western union|bitcoin/i.test(v))$("#wr").classList.add("on");
+else setTimeout(()=>add(["Haha, nice! Tell me more.","That sounds lovely.","I like that. What do you do for fun?"][Math.random()*3|0]),900)}
+$("#mi").onkeydown=e=>e.key=="Enter"&&say();
+function plan(){const O=[["Waterfront walk",0],["Coffee & pastries",15000],["Sunset ice cream",8000],["Lunch for two",25000],["Evening show",30000]];let s=0;
+$("#pl").innerHTML=O.filter(o=>s+o[1]<=a?(s+=o[1],1):0).map(o=>`<li><span>${o[0]}</span><span>${o[1]?F(o[1])+" TSh":"Free"}</span></li>`).join("")+`<li><b>Total</b><b>${F(s)} TSh</b></li><li style="display:block;color:var(--mut)">Date companion: “What is one thing you want to achieve in the next five years?”</li>`;$("#sf").style.display="block"}
+function link(){$("#lk").textContent="Demo link: "+(location.host||"ghost-date")+"/safe/"+Math.random().toString(36).slice(2,10)}</script></body></html>
